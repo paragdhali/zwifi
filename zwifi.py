@@ -35,6 +35,7 @@ def setup_monitor_mode(interface):
 def start_airbase_ng(mon_interface, ssid):
     print(f"🚩 Starting airbase-ng on {mon_interface} with SSID {ssid}...")
     return subprocess.Popen(f"airbase-ng -e '{ssid}' -c 6 {mon_interface}", shell=True)
+    """ airbase-ng -e 'FreeWiFi' -c 6 wlan0 """
 
 def configure_bridge():
     print("🚩 onfiguring bridge...")
@@ -85,6 +86,8 @@ def main():
         run_command("iptables -t nat -F")
         run_command("echo 0 > /proc/sys/net/ipv4/ip_forward")
         run_command("service isc-dhcp-server stop")
+        run_command("systemctl start NetworkManager")
+        run_command("sudo systemctl enable NetworkManager")
         print("Hotspot stopped.")
 
 if __name__ == "__main__":
