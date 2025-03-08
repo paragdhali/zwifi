@@ -88,6 +88,7 @@ def main():
         run_command("echo 0 > /proc/sys/net/ipv4/ip_forward")
         run_command("service isc-dhcp-server stop")
         run_command("systemctl start NetworkManager")
+        run_command("ssystemctl enable NetworkManager")
 
         print("Hotspot stopped.")
 
